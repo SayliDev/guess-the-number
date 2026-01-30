@@ -1,14 +1,14 @@
 export enum GameResult {
   VICTORY = 'Bravo!',
   TOO_LATE = 'Trop tard!',
-  TOO_SMALL = 'Plus petit...',
-  TOO_BIG = 'Plus grand...',
+  TOO_SMALL = 'Trop petit...',
+  TOO_BIG = 'Trop grand...',
 }
 
 export class Game {
   constructor(private readonly secretNumber: number) {}
   private attempts: number = 0;
-  private readonly maxAttempts: number = 10;
+  private readonly maxAttempts: number = 5;
   private numberGuessed: number | null = null;
   private gameOver: boolean = false;
 
@@ -16,6 +16,7 @@ export class Game {
     if (this.gameOver) {
       return GameResult.TOO_LATE;
     }
+    console.log(this.secretNumber);
 
     this.attempts++;
 
@@ -31,10 +32,10 @@ export class Game {
     }
 
     if (number > this.secretNumber) {
-      return GameResult.TOO_SMALL;
+      return GameResult.TOO_BIG;
     }
 
-    return GameResult.TOO_BIG;
+    return GameResult.TOO_SMALL;
   }
 
   public getAttemptsMade(): number {
