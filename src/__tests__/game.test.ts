@@ -9,7 +9,7 @@ function createGameWithSecret(secretNumber: number): Game {
 
 describe('Game', () => {
   it.each(SECRET_NUMBERS)(
-    'devrait retourner VICTORY si le nombre est deviné correctement (secret=%i)',
+    'should return VICTORY if the number is guessed correctly (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       const result = game.guess(secretNumber);
@@ -18,7 +18,7 @@ describe('Game', () => {
   );
 
   it.each(SECRET_NUMBERS)(
-    'devrait retourner TOO_BIG si le nombre est trop grand (secret=%i)',
+    'should return TOO_BIG if the number is too big (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       const result = game.guess(secretNumber + 1);
@@ -27,7 +27,7 @@ describe('Game', () => {
   );
 
   it.each(SECRET_NUMBERS)(
-    'devrait retourner TOO_SMALL si le nombre est trop petit (secret=%i)',
+    'should return TOO_SMALL if the number is too small (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       const result = game.guess(secretNumber - 1);
@@ -36,7 +36,7 @@ describe('Game', () => {
   );
 
   it.each(SECRET_NUMBERS)(
-    'devrait retourner DEFEAT si plus de 10 essais ont été faits (secret=%i)',
+    'should return DEFEAT if more than 10 attempts have been made (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       for (let i = 0; i < MAX_ATTEMPTS; i++) {
@@ -48,8 +48,16 @@ describe('Game', () => {
     }
   );
 
+  it('should return VICTORY if the game is over and the player has won (secret=%i)', () => {
+    const game = createGameWithSecret(10);
+    game.guess(10);
+    expect(game.isGameOver()).toBe(true);
+    expect(game.hasWon()).toBe(true);
+    expect(game.guess(10)).toBe(GameResult.VICTORY);
+  });
+
   it.each(SECRET_NUMBERS)(
-    "devrait retourner le nombre d'essais faits (secret=%i)",
+    'should return the number of attempts made (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       // je pars de 1 car sinon ça trouve le nombre secret (secretNumber + 0 = secretNumber)
@@ -61,7 +69,7 @@ describe('Game', () => {
   );
 
   it.each(SECRET_NUMBERS)(
-    "devrait retourner le nombre d'essais restants (secret=%i)",
+    'should return the number of attempts remaining (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       // pareil ici
@@ -73,7 +81,7 @@ describe('Game', () => {
   );
 
   it.each(SECRET_NUMBERS)(
-    'devrait retourner true si le jeu est terminé (secret=%i)',
+    'should return true if the game is over (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       for (let i = 0; i < MAX_ATTEMPTS; i++) {
@@ -84,7 +92,7 @@ describe('Game', () => {
   );
 
   it.each(SECRET_NUMBERS)(
-    'devrait retourner true si le joueur a gagné (secret=%i)',
+    'should return true if the player has won (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       game.guess(secretNumber);
@@ -93,7 +101,7 @@ describe('Game', () => {
   );
 
   it.each(SECRET_NUMBERS)(
-    'devrait retourner le nombre secret (secret=%i)',
+    'should return the secret number (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       expect(game.getSecretNumber()).toBe(secretNumber);
@@ -101,7 +109,7 @@ describe('Game', () => {
   );
 
   it.each([10, 25, 50])(
-    'devrait réinitialiser le jeu avec startNewGame (secret=%i)',
+    'should reset the game with startNewGame (secret=%i)',
     (secretNumber) => {
       const game = createGameWithSecret(secretNumber);
       game.guess(Math.max(1, secretNumber - 5));
