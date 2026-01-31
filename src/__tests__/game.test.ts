@@ -1,6 +1,6 @@
 import { Game, GameResult } from '../game';
 import { describe, it, expect } from 'vitest';
-const SECRET_NUMBERS = [2, 10, 50, 99, 100];
+const SECRET_NUMBERS = [1, 2, 27, 49, 50, 83, 99, 100];
 const MAX_ATTEMPTS = 10;
 
 function createGameWithSecret(secretNumber: number): Game {
