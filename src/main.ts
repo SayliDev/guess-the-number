@@ -1,10 +1,7 @@
 import { Game } from './game';
-import { Random } from './random';
 import * as readline from 'readline';
 
-const random = new Random();
-const secretNumber = random.generate(1, 100);
-const game = new Game(secretNumber, random);
+const game = new Game();
 
 const rl = readline.createInterface({
   input: process.stdin,
