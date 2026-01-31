@@ -4,7 +4,7 @@ import * as readline from 'readline';
 
 const random = new Random();
 const secretNumber = random.generate(0, 100);
-const game = new Game(secretNumber);
+const game = new Game(secretNumber, random);
 
 const rl = readline.createInterface({
   input: process.stdin,

@@ -1,3 +1,5 @@
+import { RandomGenerator } from './random';
+
 export enum GameResult {
   VICTORY = 'Bravo!',
   TOO_LATE = 'Trop tard!',
@@ -6,17 +8,19 @@ export enum GameResult {
 }
 
 export class Game {
-  constructor(private readonly secretNumber: number) {}
-  private attempts: number = 0;
-  private readonly maxAttempts: number = 5;
-  private numberGuessed: number | null = null;
-  private gameOver: boolean = false;
+  constructor(
+    private readonly secretNumber: number,
+    private readonly random: RandomGenerator,
+    private attempts: number = 0,
+    private readonly maxAttempts: number = 5,
+    private numberGuessed: number | null = null,
+    private gameOver: boolean = false
+  ) {}
 
   public guess(number: number): GameResult {
     if (this.gameOver) {
       return GameResult.TOO_LATE;
     }
-    console.log(this.secretNumber);
 
     this.attempts++;
 
