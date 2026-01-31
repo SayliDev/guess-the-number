@@ -3,7 +3,7 @@ import { Random } from './random';
 import * as readline from 'readline';
 
 const random = new Random();
-const secretNumber = random.generate(0, 100);
+const secretNumber = random.generate(1, 100);
 const game = new Game(secretNumber, random);
 
 const rl = readline.createInterface({
@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 });
 
 function askQuestion() {
-  rl.question('Entrez un nombre entre 0 et 100: ', (input) => {
+  rl.question('Entrez un nombre entre 1 et 100: ', (input) => {
     const number = parseInt(input);
 
     if (isNaN(number)) {
@@ -21,8 +21,8 @@ function askQuestion() {
       return;
     }
 
-    if (number < 0 || number > 100) {
-      console.log('Veuillez entrer un nombre entre 0 et 100 :');
+    if (number < 1 || number > 100) {
+      console.log('Veuillez entrer un nombre entre 1 et 100 :');
       askQuestion();
       return;
     }
